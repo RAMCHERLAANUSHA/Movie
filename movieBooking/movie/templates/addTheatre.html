@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Theatre</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body{
+            background-color: whitesmoke;
+        }
+        input[type="file"]{
+            width: 300px; 
+            height: 30px; 
+            margin-top: 10px; 
+            margin-left:40px; 
+            padding: 7px; 
+            border-radius: 12px;
+            font-size: 12px; 
+        }
+        #logbtn{
+            border: none;
+            background-color: rgb(59, 58, 58);
+            color: white;
+            width: 120px;
+            height: 30px;
+        }
+        .details {
+            border: none;
+            background-color: rgb(59, 58, 58);
+            color: white;
+            width: 140px;
+            height: 30px;
+        }
+        .detailsbtn {
+            margin-top: 10%;
+            margin-left: 80%;
+            position: absolute;
+        }
+        .sidebar{
+            width: 20%;
+            background-color: rgb(59, 58, 58);
+            color: white;
+            height: 100vh;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar-content{
+            padding-top: 30%;
+        }
+        .admin{
+            margin-left: 20px
+        }
+        .fa-solid.fa-list{
+            margin-left: 130px;
+        }
+        hr{
+            margin-bottom: 20%;
+        }
+        .fonticon{
+            font-weight: 700;
+            margin-top: 5px;
+        }
+        .addlink{
+            color: white;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        .fa-solid.fa-circle-plus{
+            margin-left: 20px;
+        }
+        .links{
+            margin-bottom: 10%;
+        }
+        .content{
+            width: 65%;
+            /* margin-top: 7%; */
+            margin-left: 30%;
+            position: absolute;
+        }
+        label{
+            font-weight: 700;
+            width: 120px;
+        }
+        input{
+            width: 300px; 
+            height: 30px; 
+            margin-top: 10px; 
+            margin-left:40px; 
+            padding: 7px; 
+            border-radius: 12px; 
+        }
+        select{
+            width: 300px; 
+            height: 30px; 
+            margin-top: 10px; 
+            margin-left:40px; 
+            padding: 7px; 
+            border-radius: 12px;
+            font-size: 12px;
+        }
+        .addbtn{
+            width: 120px;
+            height: 25px;
+            border: none;
+            background-color: rgb(59, 58, 58);
+            color: white;
+        }
+        .add{
+            text-align: end;
+        }
+        .card{
+            width: 60%;
+        }
+        h4{
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .success-message {
+            color: green;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg d-flex flex-row bg-white fixed-top">
+        <div class="container-fluid justify-content-start">
+            <p class="fonticon"><i class="fa-solid fa-film mx-1"></i>Movie-Booking</p>
+        </div>
+        <div class="container-fluid justify-content-end mx-3">
+            <button type="button" id="logbtn" onclick="back()"><i class="fa-solid fa-arrow-left mx-1"></i>HomePage</button>
+        </div>
+    </nav>
+    <div class="sidebar">
+        <div class="sidebar-content">
+            <h5 class="admin">Admin<i class="fa-solid fa-list"></i></h5><hr>
+        </div>
+        <P class="links"><i class="fa-solid fa-circle-plus"></i><a href="/addLocation/" class="addlink">Add Location</a></P>
+        <P class="links"><i class="fa-solid fa-circle-plus"></i><a href="/addTheatre/" class="addlink">Add Theatres</a></P>        
+        <P class="links"><i class="fa-solid fa-circle-plus"></i><a href="/addMovies/" class="addlink">Add Movies</a></P>
+        <P class="links"><i class="fa-solid fa-circle-plus"></i><a href="/addPremiere/" class="addlink">Add Premiere</a></P>
+        <P class="links"><i class="fa-solid fa-circle-plus"></i><a href="/addEvents/" class="addlink">Add Events</a></P>
+        <P class="links"><i class="fa-solid fa-circle-plus"></i><a href="/addCast/" class="addlink">Add Movie-Cast</a></P>
+        <P class="links"><i class="fa-solid fa-circle-plus"></i><a href="/addPoster/" class="addlink">Add Add-Poster</a></P>
+    </div>
+    <div class="content">
+        <div class="detailsbtn">
+            <button type="button" class="details mx-2" onclick="TheatreDetails()">Theatre-Details</button>
+        </div>
+        <div class="container d-flex align-items-center justify-content-center vh-100">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <h4> {% if not btval %} Add Theatre {%else%} Update Theatre {% endif %}</h4>
+                    </div>                    
+                    <form  enctype="multipart/form-data" action="" method="post" onsubmit="updatemessage('{{btval}}')">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <div class="add">
+                            <button type="submit" class="addbtn">{% if btval %} Update {%else%} Add Theatre {% endif %}</button>
+                        </div>
+                        <p class="success-message">{{error}}</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function back(){
+            window.location.href="/adminList/";
+        }
+        function TheatreDetails() {
+                window.location.href = "/theatreManage/";
+        }
+        function updatemessage(isUpdate){
+            if (isUpdate=="Update"){
+                alert("Updated Successfully")
+            }
+        }
+    </script>
+</body>
+</html>

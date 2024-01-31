@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>location-details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body{
+            background-color: whitesmoke;
+        }
+        #logbtn{
+            border: none;
+            background-color: rgb(59, 58, 58);
+            color: white;
+            width: 120px;
+            height: 30px;
+        }
+        .sidebar{
+            width: 20%;
+            background-color: rgb(59, 58, 58);
+            color: white;
+            height: 100vh;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar-content{
+            padding-top: 30%;
+        }
+        .admin{
+            margin-left: 20px
+        }
+        .fa-solid.fa-list{
+            margin-left: 130px;
+        }
+        hr{
+            margin-bottom: 20%;
+        }
+        .fonticon{
+            font-weight: 700;
+            margin-top: 5px;
+        }
+        .addlink{
+            color: white;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        .fa-solid.fa-circle-plus{
+            margin-left: 20px;
+        }
+        .links{
+            margin-bottom: 10%;
+        }
+        .content{
+            width: 76%;
+            margin-top: 10%;
+            margin-left: 22%;
+            margin-right: 2%;
+            position: absolute;
+        }
+        .table-responsive{
+            width: 100%;
+        }
+        .table{
+            border: 1px solid black !important;
+        }
+        .table tr,.table th, .table td{
+            border: 1px solid black !important;
+        }
+        .table th{
+            background-color: rgb(59, 58, 58);
+            color: white;
+        }
+        .edbtn{
+            width: 70px;
+            height: 26px;
+            background-color: rgb(59, 58, 58);
+            color: white !important;
+            border: none;
+        }
+        .hrefbtn{
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg d-flex flex-row bg-white fixed-top">
+        <div class="container-fluid justify-content-start">
+            <p class="fonticon"><i class="fa-solid fa-film mx-1"></i>Movie-Booking</p>
+        </div>
+        <div class="container-fluid justify-content-end mx-3">
+            <button type="button" id="logbtn" onclick="back()"><i class="fa-solid fa-arrow-left mx-1"></i>HomePage</button>
+        </div>
+    </nav>
+    <div class="sidebar">
+        <div class="sidebar-content">
+            <h5 class="admin">Admin<i class="fa-solid fa-list"></i></h5><hr>
+        </div>
+        <P class="links"><i class="fa-solid fa-circle-plus"></i><a href="/addLocation/" class="addlink">Add Location</a></P>
+        <P class="links"><i class="fa-solid fa-circle-plus"></i><a href="/addTheatre/" class="addlink">Add Theatres</a></P>
+        <P class="links"><i class="fa-solid fa-circle-plus"></i><a href="/addMovies/" class="addlink">Add Movies</a></P>
+        <P class="links"><i class="fa-solid fa-circle-plus"></i><a href="/addPremiere/" class="addlink">Add Premiere</a></P>
+        <P class="links"><i class="fa-solid fa-circle-plus"></i><a href="/addEvents/" class="addlink">Add Events</a></P>
+        <P class="links"><i class="fa-solid fa-circle-plus"></i><a href="/addCast/" class="addlink">Add premiere-Cast</a></P>
+        <P class="links"><i class="fa-solid fa-circle-plus"></i><a href="/addPoster/" class="addlink">Add Add-Poster</a></P>
+
+    </div>
+    <div class="content">
+        <div class="container d-flex align-items-center justify-content-center">
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Premiere Name</th>
+                        <th>Duration</th>
+                        <th>Type</th>
+                        <th>Release Date</th>
+                        <th>Languages</th>
+                        <th>Poster</th>
+                        <th>Rent Cost</th>
+                        <th>Buy Cost</th>
+                        <th>About Premiere</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    {% for premiere in premieres %}
+                    <tr>
+                        <td>{{premiere.id}}</td>
+                        <td>{{premiere.premiere_name}}</td>
+                        <td>{{premiere.duration}}</td>
+                        <td>{{premiere.type}}</td>
+                        <td>{{premiere.release_date}}</td>
+                        <td>{{premiere.languages}}</td>
+                        <td>{{premiere.premiere_poster}}</td>
+                        <td>{{premiere.rent_cost}}</td>
+                        <td>{{premiere.buy_cost}}</td>
+                        <td>{{premiere.about_movie}}</td>
+                        <td><button class="edbtn"><a href="/editpremiere/{{premiere.id}}/" class="hrefbtn">Update</a></button></td>
+                        <td><button class="edbtn" onclick="deletePremiere()"><a href="/deletepremiere/{{premiere.id}}/" class="hrefbtn">Delete</a></button></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        function back(){
+            window.location.href="/adminList/";
+        }
+        function deletePremiere(){
+            alert("Premiere Deleted Successfully")
+        }
+    </script>
+</body>
+</html>

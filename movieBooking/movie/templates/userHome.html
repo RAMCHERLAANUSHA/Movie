@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body{
+            background-color: white;
+        }
+        .item{
+            width: 80px;
+            height: 30px;
+            text-align: center;
+            border: none;
+            background-color: rgb(59, 58, 58);
+            color: white !important;
+        }
+        #navbtn{
+            color: white;
+            font-size: 15px;
+            margin-top: -5px;
+        }
+        select{
+            width: 250px;
+        }
+        .fonticon{
+            font-weight: 700;
+            margin-top: 5px;
+        }
+        .navbot{
+            margin-top: 50px;
+            background-color: whitesmoke;
+            margin-top: 60px;
+        }
+        .pic{
+            width: 220px;
+            height: 350px;
+        }
+        .back{
+            background-color: rgb(13, 13, 30);
+        }
+        .addline{
+            color: yellow;
+            font-weight: bolder;
+            text-align: center;
+        }
+        .see{
+            text-align: end;
+            margin-left: -20px;
+            margin-top: 15px;
+        }
+        .asee{
+            text-decoration: none;
+            color: black;
+        }
+        .type{
+            font-size: 15px;
+            margin-top: -5px;
+        }
+        .fa-solid.fa-circle-play{
+            font-size: 60px;
+            color: rgb(244, 83, 83);
+        }
+        .premiere{
+            margin-left: -20px;
+        }
+        .premcol{
+            background-color: rgb(13, 13, 30);
+            color: white;
+        }
+        .contact{
+            background-color: rgb(59, 58, 58);
+            color: white;
+            margin-left: 100px;
+        }
+        .down{
+            background-color: rgb(22, 22, 40);
+            padding-left: 20px;
+        }
+        .rowicon{
+            font-size: 80px;
+            color: rgb(176, 173, 173);
+            margin-left: 30px;
+        }
+        .pcolor{
+            color: rgb(176, 173, 173);
+        }
+        .card{
+            border-radius: 0 !important;
+        }
+        .botcolor{
+            font-size: 13px;
+            color: rgb(176, 173, 173);
+            margin-left: 5px;
+        }
+        .bot{
+            font-size: 10px;
+            color: rgb(176, 173, 173);
+            margin-left: 5px;
+        }
+        .bottom{
+            color: white;
+        }
+        .socialicons{
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            background-color: rgb(176, 173, 173);
+            border: none;
+        }
+        .pix{
+            color: black;
+        }
+        .social{
+            text-align: center;
+            margin-left: -25px;
+        }
+        .mvbtn{
+            border: none;
+            background-color: white;
+            color: black;
+            text-align: left;
+        }
+        .mvhref{
+            color: black;
+            text-decoration: none;
+        }
+        .premhref{
+            color: white;
+            text-decoration: none;
+        }
+        .prembtn{
+            border: none;
+            background-color: rgb(13, 13, 30);
+            color: white;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <!--=============================================================================================================== -->
+    <nav class="navbar navbar-expand-lg d-flex flex-row bg-white fixed-top">
+        <div class="container-fluid justify-content-start">
+            <p class="fonticon"><i class="fa-solid fa-film mx-1"></i>Movie-Booking</p>
+        </div>
+        <ul class="navbar-nav collapse navbar-collapse" id="navbarText">
+            <li class="nav-item mx-2">
+                <button  class="item"><a class="nav-link active" id="navbtn" href="/signup/">SignUp</a></button>
+            </li>
+            <li class="nav-item mx-2" >
+                <button  class="item"><a class="nav-link active" id="navbtn" href="/login/">Logout</a></button>
+            </li>
+        </ul>
+    </nav>
+    <!-- ======================================================================================================= -->
+    <div class="navbot">
+        <nav class="navbar navbar-expand-lg flex-row">
+            <div class="container-fluid justify-content-start">
+                <div class="row">
+                    <div class="col-4">
+                        <a class="nav-link active" href="#movieSection">Movies</a>
+                    </div>
+                    <div class="col-4">
+                        <a class="nav-link active" href="#eventSection">Events</a>
+                    </div>
+                    <div class="col-4">
+                        <a class="nav-link active" href="#streamSection">Stream</a>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid justify-content-end">
+                <div class="row mx-2">
+                    <div class="col-4">
+                        <a class="nav-link active" href="#">ListYourShow</a>
+                    </div>
+                    <div class="col-4">
+                        <a class="nav-link active" href="#">Corporates</a>
+                    </div>
+                    <div class="col-4">
+                        <a class="nav-link active" href="#">Gift Cards</a>
+                    </div>
+                </div>
+            </div>
+        </nav>  
+    </div>
+    <!-- ====================================================================================================== -->
+    <div class="container-fluid">
+        <div id="carouselSection" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            <div class="carousel-inner">
+                {% for poster in posters %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ poster.add_poster.url }}" class="d-block w-100" alt="...">
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="custom-carousel-indicators">
+                <span data-bs-target="#carouselSection" data-bs-slide-to="0" class="bullet active"></span>
+                <span data-bs-target="#carouselSection" data-bs-slide-to="1" class="bullet"></span>
+                <span data-bs-target="#carouselSection" data-bs-slide-to="2" class="bullet"></span>
+            </div>
+            
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselSection" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselSection" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <!-- ================================================================================================================== -->
+    <div class="card" id="movieSection">
+        <div class="card-body mt-3">
+            <div class="row">
+                <div class="col-6">
+                    <h3 class="mb-3 mx-5">Recommended Movies</h3>
+                </div>
+                <div class="col-6 see">
+                    <a href="" class="asee mx-5">See All ></a>
+                </div>
+            </div>
+            <div class="row mx-4">
+                {% for movie in movies %}
+                    <div class="col-2 mb-4 mx-3">
+                    <button class="mvbtn">
+                        <a href="/movieinner/{{movie.id}}/" class="mvhref">
+                        <div class="card">
+                            <img src="{{ movie.movie_poster.url }}" class="card-img-top pic" alt="...">
+                        </div>
+                        <h5 class="mt-1">{{movie.movie_name}}</h5>
+                        <p class="type">{{movie.type}}</p>
+                        </a>
+                    </button>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- =========================================================================================================== -->
+    <div class="card mt-5 back mx-4">
+        <div class="card-body">
+            <h1 class="addline">Endless Entertainment Anytime Anywhere!</h1>
+        </div>
+    </div>
+    <!-- ============================================================================================================= -->
+    <div class="card" id="eventSection">
+        <div class="card-body mt-3">
+            <div class="row">
+                <div class="col-6">
+                    <h3 class="mb-3 mx-5">Popular Events</h3>
+                </div>
+                <div class="col-6 see">
+                    <a href="" class="asee mx-5">See All ></a>
+                </div>
+            </div>
+            <div class="row mx-4">
+                {% for event in events %}
+                    <div class="col-2 mb-4 mx-3">
+                        <button class="mvbtn">
+                            <a href="/eventinner/{{event.id}}/" class="mvhref">
+                                <div class="card">
+                                    <img src="{{ event.event_poster.url }}" class="card-img-top pic" alt="...">
+                                </div>
+                                <h5 class="mt-1">{{event.event_name}}</h5>
+                                <p class="type">{{event.place}}:{{event.location.location}}</p>
+                            </a>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- ================================================================================================================= -->
+    <div class="card premcol" id="streamSection">
+        <div class="card-body mt-3">
+                <div class="row mx-5 mb-5 justify-content-lg-start">
+                    <div class="col-1">
+                        <i class="fa-solid fa-circle-play"></i>
+                    </div>
+                    <div class="col-6 premiere">
+                        <h2>PREMIERE</h2>
+                        <p>Watch new movies at home, every Friday</p>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="col-6">
+                    <h3 class="mx-5">Premieres</h3>
+                    <p class="mb-3 mx-5 type">Brand new releases every Friday</p>
+                </div>
+            </div>
+            <div class="row mx-4">
+                {% for premiere in premieres %}
+                    <div class="col-2 mb-4 mx-3">
+                        <button class="prembtn">
+                            <a href="/premiereinner/{{premiere.id}}/" class="premhref">
+                                <div class="card">
+                                    <img src="{{ premiere.premiere_poster.url }}" class="card-img-top pic" alt="...">
+                                </div>
+                                <h5 class="mt-1">{{premiere.premiere_name}}</h5>
+                                <p class="type">{{premiere.languages}}</p>
+                            </a>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!--====================================================================================================================  -->
+    <div class="container mt-3 mx-5 pt-2 pb-2">
+        <div class="row">
+            <div class="col-2">
+                <h5 style="font-weight: 900;">List your show</h5>
+            </div>
+            <div class="col-7">
+                <h5 style="font-weight: 900;">Partner with us & get listed on Booking Movie</h5>
+            </div>
+            <div class="col-3 align-items-end">
+                <button class="contact">Contact today!</button>
+            </div>
+        </div>
+    </div>
+    <!-- ================================================================================================================= -->
+    <div class="card mt-2 down">
+        <div class="card-body mt-5 mx-5">
+            <div class="row mx-5">
+                <div class="col-4">
+                    <i class="fa-solid fa-headset rowicon"></i>
+                    <p class="pcolor mt-3">24/7 CUSTOMER CARE</p>
+                </div>
+                <div class="col-4">
+                    <i class="fa-solid fa-ticket rowicon" style="margin-left: 60px;"></i>
+                    <p class="pcolor mt-3">RESEND BOOKING CONFIRMATION</p>
+                </div>
+                <div class="col-4">
+                    <i class="fa-solid fa-envelope-open-text rowicon" style="margin-left: 60px;"></i>
+                    <p class="pcolor mt-3">SUBSCRIBE TO THE NEWS LETTER</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ==================================================================================================================  -->
+    <div class="card back px-5">
+        <div class="card-body mt-3">
+            <p class="botcolor">MOVIES NOW SHOWING IN HYDERABAD</p>
+            <div class="d-flex flex-row">
+                {% for movie in movies %}
+                    <p class="bot">{{ movie.movie_name }}|<span> </span></p>
+                {% endfor %}
+            </div>
+            <p class="botcolor mt-2">POPULAR EVENTS</p>
+            <div class="d-flex flex-row">
+                {% for event in events %}
+                    <p class="bot">{{ event.event_name }}|<span> </span></p>
+                {% endfor %}
+            </div>
+            <p class="botcolor mt-2">PREMIERES</p>
+            <div class="d-flex flex-row">
+                {% for premiere in premieres %}
+                    <p class="bot">{{ premiere.premiere_name }}|<span> </span></p>
+                {% endfor %}
+            </div>
+            <p class="botcolor mt-2">HELP</p>
+            <div class="d-flex flex-row">
+                <p class="bot">About us| Contact us| Current Opening| Press Relesase| Sitemap| FAQs| Terms and Conditions| Privacy Policy</p>
+            </div>
+            <div class="row mt-3 bottom">
+                <div class="col-5">
+                    <hr>
+                </div>
+                <div class="col-2">
+                    <p><i class="fa-solid fa-film mx-1"></i>Movie-Booking</p>
+                </div>
+                <div class="col-5">
+                    <hr>
+                </div>
+            </div>
+            <div class="social mt-5">
+                <button class="socialicons"><i class="fa-brands fa-facebook pix"></i></button>
+                <button class="socialicons"><i class="fa-brands fa-youtube pix"></i></button>
+                <button class="socialicons"><i class="fa-brands fa-instagram pix"></i></button>
+                <button class="socialicons"><i class="fa-brands fa-twitter pix"></i></button>
+                <p class="bot mt-3">Copyright 2024 @Anusha Reddy All rights Reserved</p>
+            </div>
+        </div>
+    </div>    
+
+    <script>
+        function logoutbtn(){
+            alert("Logout successful");
+            window.location.href="/userHome/";
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+</body>
+</html>

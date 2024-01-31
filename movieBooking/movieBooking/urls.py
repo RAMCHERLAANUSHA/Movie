@@ -19,7 +19,48 @@ from django.urls import path
 from django.views.static import serve
 from django.conf import settings
 from django.conf.urls.static import static
+from movie import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('adminlogin/',views.adminLogin),
+    path('adminList/',views.adminList),
+    path('addLocation/',views.addLocation),
+    path('addTheatre/',views.addTheatre),
+    path('addMovies/',views.addMovies),
+    path('addPremiere/',views.addPremiere),
+    path('addEvents/',views.addEvents),
+    path('addCast/',views.addCast),
+    path('addPoster/',views.addAdds),
+    path('locationManage/',views.locationManage),
+    path('deletelocation/<int:id>/',views.deleteLocation),
+    path('editlocation/<int:id>/',views.editLocation),
+    path('theatreManage/',views.theatreManage),
+    path('deletetheatre/<int:id>/',views.deleteTheatre),
+    path('edittheatre/<int:id>/',views.editTheatre),
+    path('userManage/',views.userManage),
+    path('movieManage/',views.movieManage),
+    path('deletemovie/<int:id>/',views.deleteMovie),
+    path('editmovie/<int:id>/',views.editMovie),
+    path('premiereManage/',views.premiereManage),
+    path('deletepremiere/<int:id>/',views.deletePremiere),
+    path('editpremiere/<int:id>/',views.editPremiere),
+    path('eventManage/',views.eventManage),
+    path('deleteevent/<int:id>/',views.deleteEvent),
+    path('editevent/<int:id>/',views.editEvent),
+    path('paymemtManage/',views.paymentManage),
+    path('castManage/',views.castManage),
+    path('deletecast/<int:id>/',views.deleteCast),
+    path('editcast/<int:id>/',views.editCast),
+    path('posterManage/',views.addManage),
+    path('deleteposter/<int:id>/',views.deleteAdd),
+    path('editposter/<int:id>/',views.editAdd),
+
+    path('userHome/',views.userHomePage),
+    path('signup/',views.signUp),
+    path('login/',views.signIn),
+    path("movieinner/<int:id>/",views.movieInner),
+    path("premiereinner/<int:id>/",views.premiereInner),
+    path("eventinner/<int:id>/",views.eventInner),
+    path('payment/<int:id>/',views.Payment)
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

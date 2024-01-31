@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Signup</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body{
+            background-color: whitesmoke;
+        }
+        label{
+            font-weight: 700;
+            width: 120px;
+            margin-left: 100px;
+        }
+        input{
+            width: 300px; 
+            height: 25px; 
+            margin-top: 7px; 
+            margin-left:40px; 
+            padding: 7px; 
+            border-radius: 12px; 
+        }
+        .addbtn{
+            width: 70px;
+            height: 25px;
+            border: none;
+            background-color: rgb(59, 58, 58);
+            color: white;
+        }
+        .add{
+            text-align: center;
+        }
+        .card{
+            width: 60%;
+        }
+        h4{
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .success-message {
+            color: green;
+            text-align: center;
+        }
+        input[type="file"]{
+            width: 300px; 
+            height: 30px; 
+            margin-top: 7px; 
+            margin-left:40px; 
+            padding: 7px; 
+            border-radius: 12px;
+            font-size: 12px; 
+        }
+    </style>
+</head>
+<body>
+    <div style="margin-top: 140px;">
+        <div class="container d-flex align-items-center justify-content-center vh-100">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <h4>SignUp</h4>
+                    </div>                    
+                    <form  enctype="multipart/form-data" action="" method="post">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <div class="add">
+                            <button type="submit" class="addbtn" onclick="signUp()">SignUp</button>
+                        </div>
+                        <p class="success-message">{{error}}</p>
+                        <p style="text-align: center;">already have an account? <a href="/login/">SignIn</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function signUp(){
+            alert('SignUp successfull!!!');
+            window.location.href="/userHome/";
+            let data6 = { flags: true};
+            localStorage.setItem('flagstore', JSON.stringify(data6));
+        }
+    </script>
+</body>
+</html>

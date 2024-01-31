@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Inner</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body{
+            background-color: whitesmoke;
+        }
+        .item{
+            width: 80px;
+            height: 30px;
+            text-align: center;
+            border: none;
+            background-color: rgb(59, 58, 58);
+            color: white !important;
+        }
+        #navbtn{
+            color: white;
+            font-size: 15px;
+            margin-top: -5px;
+        }
+        select{
+            width: 250px;
+        }
+        .fonticon{
+            font-weight: 700;
+            margin-top: 5px;
+        }
+        .navbot{
+            margin-top: 50px;
+            background-color: whitesmoke;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <!--=============================================================================================================== -->
+    <nav class="navbar navbar-expand-lg d-flex flex-row bg-white fixed-top">
+        <div class="container-fluid justify-content-start">
+            <p class="fonticon"><i class="fa-solid fa-film mx-1"></i>Movie-Booking</p>
+        </div>
+        <ul class="navbar-nav collapse navbar-collapse" id="navbarText">
+            <li class="nav-item mx-2">
+                <button  class="item"><a class="nav-link active" id="navbtn" href="/signup/">SignUp</a></button>
+            </li>
+            <li class="nav-item mx-2" >
+                <button  class="item"><a class="nav-link active" id="navbtn" href="/login/">SignIn</a></button>
+            </li>
+        </ul>
+    </nav>
+    <!-- ======================================================================================================= -->
+    <div class="navbot">
+        <nav class="navbar navbar-expand-lg flex-row">
+            <div class="container-fluid justify-content-start">
+                <div class="row">
+                    <div class="col-4">
+                        <a class="nav-link active" href="#movieSection">Movies</a>
+                    </div>
+                    <div class="col-4">
+                        <a class="nav-link active" href="#eventSection">Events</a>
+                    </div>
+                    <div class="col-4">
+                        <a class="nav-link active" href="#streamSection">Stream</a>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid justify-content-end">
+                <div class="row mx-2">
+                    <div class="col-4">
+                        <a class="nav-link active" href="#">ListYourShow</a>
+                    </div>
+                    <div class="col-4">
+                        <a class="nav-link active" href="#">Corporates</a>
+                    </div>
+                    <div class="col-4">
+                        <a class="nav-link active" href="#">Gift Cards</a>
+                    </div>
+                </div>
+            </div>
+        </nav>  
+    </div>
+    <!-- ===================================================================================================================== -->
+    <!-- <div class="card mb-1">
+        <div class="card-body">
+            <h1>{{movies.movie_name }}</h1>
+            <h6>{{movies.type}}</h6>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h6>Location: {{locations.location}}</h6>
+            {% for theatres in theatre%}
+            <h6>-{{theatres.theatre_name}}</h6>
+            {% endfor %}
+        </div>
+    </div> -->
+</body>
+</html>
