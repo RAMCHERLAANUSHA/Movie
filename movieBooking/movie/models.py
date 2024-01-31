@@ -71,8 +71,14 @@ class Payment(models.Model):
     filter_prize = models.IntegerField()
     no_of_tickets = models.IntegerField()
     total_cost = models.IntegerField()
-    email = models.EmailField(default="ex@gmail.com")
+    email = models.EmailField()
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    theatre = models.ForeignKey(Theatre, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def save(self, *args, **kwargs):
+        self.total_cost = self.filter_prize * self.no_of_tickets
+        super(Payment, self).save(*args, **kwargs)
 
 class Adds(models.Model):
     add_poster= models.ImageField(upload_to='images')

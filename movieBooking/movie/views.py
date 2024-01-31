@@ -6,8 +6,7 @@ from movie.models import  Location, Movie, Theatre, Premium_Movie, Movie_cast, E
 from django.contrib.auth.models import User as Admin
 from movie.forms import  LocationForm, MovieForm, TheatreForm, Premium_MovieForm, Movie_castForm, EventsForm, UserForm, PaymentForm, AddsForm
 from django.contrib.auth.hashers import check_password
-
-# Create your views here.
+from django.urls import reverse
 
 def validate_mobile_number(value):
     value = str(value)
@@ -298,14 +297,6 @@ def editEvent(request,id):
             context['error']="Something went wrong"
     return render(request,'addEvents.html',context)
 
-    
-def paymentManage(request):
-    context={}
-    Payment = Payment.objects.all()
-    context["payments"]=Payment
-    return render(request,"paymentManage.html",context)
-
-
 def castManage(request):
     context={}
     cast = Movie_cast.objects.all()
@@ -395,7 +386,7 @@ def signUp(request):
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('//')
+            return redirect('/userHome/')
         else:
             context['error']="Something went wrong"
     return render(request,'signup.html',context)
@@ -456,13 +447,54 @@ def eventInner(request,id):
     context['premieres']=premieres
     return render(request,"eventInner.html",context)
 
-def Payment(request,id):
+def paymentManage(request):
+    payments = Payment.objects.all()
     context={}
+    context["payments"]= payments
+    return render(request,"paymentManage.html",context)
+
+def deletePayment(request,id):
+    payment = Payment.objects.get(id=id)
+    payment.delete()
+    return redirect('/payment/{0}'.format(payment.id))
+
+
+def addPayment(request, id):
+    context = {}
+    context['form'] = PaymentForm()
     movies = Movie.objects.get(id=id)
     theatre = Theatre.objects.filter(movie=movies)
+    location = Location.objects.filter(movie=movies)
+    context['movies'] = movies
+    context['theatre'] = theatre
+    context['locations'] = location
+
+    movies = Movie.objects.all()
+    premieres = Premium_Movie.objects.all()
+    events = Events.objects.all()
+    context['events']=events
+    context['moviess']=movies
+    context['premieres']=premieres
+    context['error'] = ''
+    email = request.POST.get("email")
+    user_instance = User.objects.filter(email=email).first()
+    payments = Payment.objects.filter(email=user_instance)
+    context["payments"] = payments
     
-    location = movies.location_name
-    context['movies']=movies
-    context['theatre']=theatre
-    context['locations']=location
-    return render(request,"payment.html",context)
+    if request.method == "POST":
+        email = request.POST.get("email")
+        user_instance = User.objects.filter(email=email).first()
+        if user_instance:
+            form = PaymentForm(request.POST)
+            if form.is_valid():
+                payment_instance = form.save(commit=False)
+                payment_instance.user = user_instance
+                payment_instance.save()
+                context['error'] = "Payment Successful"
+                return render(request,"payment.html", context)
+            else:
+                context['error'] = "Something went wrong"
+        else:
+            context['error'] = "Email not registered. Please SignUp"
+
+    return render(request, "payment.html", context)

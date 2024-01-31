@@ -62,5 +62,6 @@ urlpatterns = [
     path("movieinner/<int:id>/",views.movieInner),
     path("premiereinner/<int:id>/",views.premiereInner),
     path("eventinner/<int:id>/",views.eventInner),
-    path('payment/<int:id>/',views.Payment)
+    path('payment/<int:id>/',views.addPayment),
+    path('deletepayment/<int:id>/',views.deletePayment),
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

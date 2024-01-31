@@ -60,7 +60,7 @@
             position: absolute;
         }
         .table-responsive{
-            width: 70%;
+            width: 80%;
         }
         .table{
             border: 1px solid black !important;
@@ -117,6 +117,7 @@
                         <th>Total</th>
                         <th>Email</th>
                         <th>Location</th>
+                        <th>Theatre</th>
                     </tr>
                     {% for payment in payments %}
                     <tr>
@@ -126,6 +127,7 @@
                         <td>{{payment.total_cost}}</td>
                         <td>{{payment.email}}</td>
                         <td>{{payment.location.location}}</td>
+                        <td>{{payment.theatre.theatre_name}}</td>
                     </tr>
                     {% endfor %}
                 </table>

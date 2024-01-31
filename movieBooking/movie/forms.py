@@ -1,5 +1,6 @@
 from django import forms
 from movie.models import  Location, Movie, Theatre, Premium_Movie, Movie_cast, Events, User, Payment, Adds
+from django.forms import Select
 
 class MovieForm(forms.ModelForm):
     class Meta:
@@ -56,15 +57,30 @@ class UserForm(forms.ModelForm):
         fields = '__all__'
 
 class PaymentForm(forms.ModelForm):
+    filter_prize = forms.ChoiceField(choices=(
+                (100,"0-100"),
+                (200,"100-200"),
+                (300,"200-300"),
+                (400,"300-400")
+    ))
     class Meta:
         model = Payment
         fields = '__all__'
+        exclude = ['user'] 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['user'].queryset = User.objects.all()
-        self.fields['user'].label_from_instance = lambda obj: f"{obj.firstname}"
+        self.fields['theatre'].queryset = Theatre.objects.all()
+        self.fields['theatre'].label_from_instance = lambda obj: f"{obj.theatre_name}"
         self.fields['location'].queryset = Location.objects.all()
         self.fields['location'].label_from_instance = lambda obj: f"{obj.location}"
+        # self.fields['user'].queryset = User.objects.all()
+        # self.fields['user'].label_from_instance = lambda obj: f"{obj.email}"
+    widgets = {
+        'Prize' : Select(attrs={
+                'class': "form-control", 
+                'style': 'width: 280px;height: 18px;padding: 7px;border-radius: 10px;border-width: 1px;border-color: rgba(0, 0, 0, 0.2);',
+                })
+    }
 
 class AddsForm(forms.ModelForm):
     class Meta:

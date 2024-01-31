@@ -35,6 +35,136 @@
             background-color: whitesmoke;
             margin-top: 60px;
         }
+        .location{
+            width: 320px;
+        }
+        label {
+            font-weight: 700;
+            width: 120px;
+            margin-left: 30px;
+        }
+        h4 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        input {
+
+            width: 300px;
+            height: 40px;
+            margin-top: 10px;
+            margin-left: 40px;
+            padding: 7px;
+            border-radius: 12px;
+        }
+        select{
+            width: 300px;
+            height: 40px;
+            margin-top: 10px;
+            margin-left: 40px;
+            padding: 7px;
+            border-radius: 12px;
+        }
+        input[type="file"]{
+            width: 300px; 
+            height: 30px; 
+            margin-top: 10px; 
+            margin-left:40px; 
+            padding: 7px; 
+            border-radius: 12px;
+            font-size: 12px; 
+        }
+
+        .addbtn {
+            width: 70px;
+            height: 30px;
+            border: none;
+            background-color: rgb(59, 58, 58);
+            color: white;
+        }
+
+        .add {
+            text-align: end;
+        }
+        .success-message {
+            color: green;
+            text-align: center;
+        }
+        .edbtn{
+            width: 70px;
+            height: 26px;
+            background-color: rgb(59, 58, 58);
+            color: white !important;
+            border: none;
+        }
+        .hrefbtn{
+            text-decoration: none;
+            color: white;
+        }
+        .down{
+            background-color: rgb(22, 22, 40);
+            padding-left: 20px;
+        }
+        .rowicon{
+            font-size: 80px;
+            color: rgb(176, 173, 173);
+            margin-left: 30px;
+        }
+        .pcolor{
+            color: rgb(176, 173, 173);
+        }
+        .card{
+            border-radius: 0 !important;
+        }
+        .botcolor{
+            font-size: 13px;
+            color: rgb(176, 173, 173);
+            margin-left: 5px;
+        }
+        .bot{
+            font-size: 10px;
+            color: rgb(176, 173, 173);
+            margin-left: 5px;
+        }
+        .bottom{
+            color: white;
+        }
+        .socialicons{
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            background-color: rgb(176, 173, 173);
+            border: none;
+        }
+        .pix{
+            color: black;
+        }
+        .social{
+            text-align: center;
+            margin-left: -25px;
+        }
+        .mvbtn{
+            border: none;
+            background-color: white;
+            color: black;
+            text-align: left;
+        }
+        .mvhref{
+            color: black;
+            text-decoration: none;
+        }
+        .premhref{
+            color: white;
+            text-decoration: none;
+        }
+        .prembtn{
+            border: none;
+            background-color: rgb(13, 13, 30);
+            color: white;
+            text-align: left;
+        }
+        .back{
+            background-color: rgb(13, 13, 30);
+        }
     </style>
 </head>
 <body>
@@ -84,7 +214,7 @@
         </nav>  
     </div>
     <!-- ===================================================================================================================== -->
-    <!-- <div class="card mb-1">
+    <div class="card mb-1">
         <div class="card-body">
             <h1>{{movies.movie_name }}</h1>
             <h6>{{movies.type}}</h6>
@@ -92,11 +222,139 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <h6>Location: {{locations.location}}</h6>
+            {% for location in locations%}
             {% for theatres in theatre%}
-            <h6>-{{theatres.theatre_name}}</h6>
+            <div class="row location">
+                <div class="col-5 pb-2">
+                    <h6>{{location.location}}</h6>
+                </div>
+                <div class="col-2">
+                    <h6>:</h6>
+                </div>
+                <div class="col-5">
+                    <h6>{{theatres.theatre_name}}</h6>
+                </div>
+            </div>
+            {% endfor %}
             {% endfor %}
         </div>
-    </div> -->
+    </div>
+    <div class="container d-flex align-items-center justify-content-center vh-100">
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <h4>Book Ticket</h4>
+                </div>
+                <form  enctype="multipart/form-data" action="" method="post" onsubmit="updatemessage('{{btval}}')">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <div class="add">
+                        <button type="submit" class="addbtn">Pay</button>
+                    </div>
+                    <p class="success-message">{{error}}</p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <h4>Payment Details</h4>
+    <div class="content">
+        <div class="container d-flex align-items-center justify-content-center">
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th>Prize</th>
+                        <th>Tickets</th>
+                        <th>Total</th>
+                        <th>Email</th>
+                        <th>Location</th>
+                        <th>Theatre</th>
+                        <th>Delete</th>
+
+                    </tr>
+                    {% for payment in payments %}
+                    <tr>
+                        <td>{{payment.filter_prize}}</td>
+                        <td>{{payment.no_of_tickets}}</td>
+                        <td>{{payment.total_cost}}</td>
+                        <td>{{payment.email}}</td>
+                        <td>{{payment.location.location}}</td>
+                        <td>{{payment.theatre.theatre_name}}</td>
+                        <td><button class="edbtn" onclick="deletePayment()"><a href="/deletepayment/{{payment.id}}/" class="hrefbtn">Delete</a></button></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- ========================================================================================================== -->
+    <div class="card mt-2 down">
+        <div class="card-body mt-5 mx-5">
+            <div class="row mx-5">
+                <div class="col-4">
+                    <i class="fa-solid fa-headset rowicon"></i>
+                    <p class="pcolor mt-3">24/7 CUSTOMER CARE</p>
+                </div>
+                <div class="col-4">
+                    <i class="fa-solid fa-ticket rowicon" style="margin-left: 60px;"></i>
+                    <p class="pcolor mt-3">RESEND BOOKING CONFIRMATION</p>
+                </div>
+                <div class="col-4">
+                    <i class="fa-solid fa-envelope-open-text rowicon" style="margin-left: 60px;"></i>
+                    <p class="pcolor mt-3">SUBSCRIBE TO THE NEWS LETTER</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ==================================================================================================================  -->
+    <div class="card back px-5">
+        <div class="card-body mt-3">
+            <p class="botcolor">MOVIES NOW SHOWING IN HYDERABAD</p>
+            <div class="d-flex flex-row">
+                {% for movie in moviess %}
+                    <p class="bot">{{ movie.movie_name }}|<span> </span></p>
+                {% endfor %}
+            </div>
+            <p class="botcolor mt-2">POPULAR EVENTS</p>
+            <div class="d-flex flex-row">
+                {% for event in events %}
+                    <p class="bot">{{ event.event_name }}|<span> </span></p>
+                {% endfor %}
+            </div>
+            <p class="botcolor mt-2">PREMIERES</p>
+            <div class="d-flex flex-row">
+                {% for premiere in premieres %}
+                    <p class="bot">{{ premiere.premiere_name }}|<span> </span></p>
+                {% endfor %}
+            </div>
+            <p class="botcolor mt-2">HELP</p>
+            <div class="d-flex flex-row">
+                <p class="bot">About us| Contact us| Current Opening| Press Relesase| Sitemap| FAQs| Terms and Conditions| Privacy Policy</p>
+            </div>
+            <div class="row mt-3 bottom">
+                <div class="col-5">
+                    <hr>
+                </div>
+                <div class="col-2">
+                    <p><i class="fa-solid fa-film mx-1"></i>Movie-Booking</p>
+                </div>
+                <div class="col-5">
+                    <hr>
+                </div>
+            </div>
+            <div class="social mt-5">
+                <button class="socialicons"><i class="fa-brands fa-facebook pix"></i></button>
+                <button class="socialicons"><i class="fa-brands fa-youtube pix"></i></button>
+                <button class="socialicons"><i class="fa-brands fa-instagram pix"></i></button>
+                <button class="socialicons"><i class="fa-brands fa-twitter pix"></i></button>
+                <p class="bot mt-3">Copyright 2024 @Anusha Reddy All rights Reserved</p>
+            </div>
+        </div>
+    </div>    
+    <!-- ============================================================================================================== -->
+    <script>
+        function deletePayment(){
+            alert("Payment Deleted Successfully")
+        }
+    </script>
 </body>
 </html>
