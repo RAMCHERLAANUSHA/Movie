@@ -15,6 +15,7 @@
 
         .card {
             width: 45% !important;
+            background-color: #EC5E71;
         }
 
         input {
@@ -29,23 +30,25 @@
 
         h1 {
             text-align: center !important;
+            color: white;
         }
 
         .sign {
-            text-align: center
+            text-align: center;
         }
 
         .signbtn {
-            background-color: rgb(59, 58, 58);
+            background-color: white;
             height: 28px;
             border-radius: 14px;
             width: 100px;
             border: none;
-            color: white;
+            font-weight: 700;
         }
 
         label {
             font-weight: 700;
+            color: white;
         }
 
         .error-message {
@@ -54,7 +57,7 @@
             margin-top: 5px;
         }
         .bookhref{
-            color: white;
+            color: #EC5E71;
             text-decoration: none;
         }
     </style>
@@ -90,7 +93,7 @@
                         </div>
                     </div>
                     <div class="sign">
-                        <button type="submit" class="signbtn" id="signup"><a class="bookhref">Sign In</a></button>
+                        <button type="submit" class="signbtn"><a class="bookhref">Sign In</a></button>
                     </div>
                     <div>
                         <p class="error-message">{{error}}</p>

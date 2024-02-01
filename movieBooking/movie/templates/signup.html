@@ -14,6 +14,7 @@
             font-weight: 700;
             width: 120px;
             margin-left: 100px;
+            color: white;
         }
         input{
             width: 300px; 
@@ -22,23 +23,27 @@
             margin-left:40px; 
             padding: 7px; 
             border-radius: 12px; 
+            /* background-color: whitesmoke; */
         }
         .addbtn{
             width: 70px;
             height: 25px;
             border: none;
-            background-color: rgb(59, 58, 58);
-            color: white;
+            background-color: white;
+            color: #EC5E71;
+            font-weight: 700;
         }
         .add{
             text-align: center;
         }
         .card{
             width: 60%;
+            background-color: #EC5E71;
         }
-        h4{
+        h3{
             text-align: center;
             margin-bottom: 30px;
+            color: white;
         }
         .success-message {
             color: green;
@@ -51,7 +56,8 @@
             margin-left:40px; 
             padding: 7px; 
             border-radius: 12px;
-            font-size: 12px; 
+            font-size: 14px; 
+            color: white;
         }
     </style>
 </head>
@@ -61,7 +67,7 @@
             <div class="card">
                 <div class="card-body">
                     <div>
-                        <h4>SignUp</h4>
+                        <h3>SignUp</h3>
                     </div>                    
                     <form  enctype="multipart/form-data" action="" method="post">
                         {% csrf_token %}
@@ -70,7 +76,7 @@
                             <button type="submit" class="addbtn" onclick="signUp()">SignUp</button>
                         </div>
                         <p class="success-message">{{error}}</p>
-                        <p style="text-align: center;">already have an account? <a href="/login/">SignIn</a></p>
+                        <p style="text-align: center; color: white;">already have an account? <a href="/login/">SignIn</a></p>
                     </form>
                 </div>
             </div>
