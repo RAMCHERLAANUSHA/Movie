@@ -11,17 +11,22 @@
         body{
             background-color: whitesmoke;
         }
+        .navbar{
+            background-color: #EC5E71 !important;
+            height: 60px;
+        }
         #logbtn{
             border: none;
-            background-color: #EC5E71;
-            color: white;
+            background-color: white;
+            color: #EC5E71;
             width: 80px;
             height: 30px;
+            font-weight: 700;
         }
         .sidebar{
             width: 20%;
-            background-color: #EC5E71;
-            color: white;
+            background-color: white;
+            color: #EC5E71;
             height: 100vh;
             position: fixed;
             display: flex;
@@ -29,6 +34,7 @@
         }
         .sidebar-content{
             padding-top: 30%;
+            color: #EC5E71;
         }
         .admin{
             margin-left: 20px
@@ -41,15 +47,23 @@
         }
         .fonticon{
             font-weight: 700;
-            margin-top: 5px;
+            margin-top: 10px;
+            color: white;
         }
         .addlink{
+            color: #EC5E71;
+            text-decoration: none;
+            margin-left: 10px;
+            font-weight: 700;
+        }
+        .boxlink{
             color: white;
             text-decoration: none;
             margin-left: 10px;
+            font-weight: 700;
         }
         .fa-solid.fa-circle-plus{
-            margin-left: 20px;
+            margin-left: 40px;
         }
         .links{
             margin-bottom: 10%;
@@ -70,10 +84,16 @@
         .manage{
             border: none;
             background-color: #EC5E71;
-            color: white;
+            /* color: white; */
         }
         .btns{
             text-align: center;
+        }
+        .card{
+            background-color: white;
+        }
+        h5{
+            color: #EC5E71;
         }
     </style>
 </head>
@@ -106,7 +126,7 @@
                         <h5 class="head mb-3">Location Details</h5>
                         <h5 class=" icn mb-3"><i class="fa-solid fa-location"></i></h5>
                         <div class="btns">
-                            <button class="manage" type="submit"><a class="addlink" href="/locationManage/">Location-Details</a></button>
+                            <button class="manage" type="submit"><a class="boxlink" href="/locationManage/">Location-Details</a></button>
                         </div>
                     </div>
                 </div>
@@ -117,7 +137,7 @@
                         <h5 class="head mb-3">Theatre Details</h5>
                         <h5 class=" icn mb-3"><i class="fa-solid fa-city"></i></h5>
                         <div class="btns">
-                            <button class="manage" type="submit"><a class="addlink" href="/theatreManage/">Theatre-Details</a></button>
+                            <button class="manage" type="submit"><a class="boxlink" href="/theatreManage/">Theatre-Details</a></button>
                         </div>
                     </div>
                 </div>
@@ -128,7 +148,7 @@
                         <h5 class="head mb-3">Movie Details</h5>
                         <h5 class=" icn mb-3"><i class="fa-solid fa-clapperboard"></i></h5>
                         <div class="btns">
-                            <button class="manage" type="submit"><a class="addlink" href="/movieManage/">Movie-Details</a></button>
+                            <button class="manage" type="submit"><a class="boxlink" href="/movieManage/">Movie-Details</a></button>
                         </div>
                     </div>
                 </div>
@@ -141,7 +161,7 @@
                         <h5 class="head mb-3">Premiere Details</h5>
                         <h5 class=" icn mb-3"><i class="fa-solid fa-video"></i></h5>
                         <div class="btns">
-                            <button class="manage" type="submit"><a class="addlink" href="/premiereManage/">Premiere-Details</a></button>
+                            <button class="manage" type="submit"><a class="boxlink" href="/premiereManage/">Premiere-Details</a></button>
                         </div>
                     </div>
                 </div>
@@ -152,7 +172,7 @@
                         <h5 class="head mb-3">Event Details</h5>
                         <h5 class=" icn mb-3"><i class="fa-solid fa-icons"></i></h5>
                         <div class="btns">
-                            <button class="manage" type="submit"><a class="addlink" href="/eventManage/">Event-Details</a></button>
+                            <button class="manage" type="submit"><a class="boxlink" href="/eventManage/">Event-Details</a></button>
                         </div>
                     </div>
                 </div>
@@ -163,7 +183,7 @@
                         <h5 class="head mb-3">Users Details</h5>
                         <h5 class=" icn mb-3"><i class="fa-solid fa-users"></i></h5>
                         <div class="btns">
-                            <button class="manage" type="submit"><a class="addlink" href="/userManage/">User-Details</a></button>
+                            <button class="manage" type="submit"><a class="boxlink" href="/userManage/">User-Details</a></button>
                         </div>
                     </div>
                 </div>
@@ -176,7 +196,7 @@
                         <h5 class="head mb-3">Payment Details</h5>
                         <h5 class=" icn mb-3"><i class="fa-solid fa-money-check-dollar"></i></h5>
                         <div class="btns">
-                            <button class="manage" type="submit"><a class="addlink" href="/paymemtManage/">Payment-Details</a></button>
+                            <button class="manage" type="submit"><a class="boxlink" href="/paymemtManage/">Payment-Details</a></button>
                         </div>
                     </div>
                 </div>
@@ -187,7 +207,7 @@
                         <h5 class="head mb-3">Add Details</h5>
                         <h5 class=" icn mb-3"><i class="fa-solid fa-signs-post"></i></h5>
                         <div class="btns">
-                            <button class="manage" type="submit"><a class="addlink" href="/posterManage/">Poster-Details</a></button>
+                            <button class="manage" type="submit"><a class="boxlink" href="/posterManage/">Poster-Details</a></button>
                         </div>
                     </div>
                 </div>
@@ -198,7 +218,7 @@
                         <h5 class="head mb-3">Cast Details</h5>
                         <h5 class=" icn mb-3"><i class="fa-solid fa-user-check"></i></h5>
                         <div class="btns">
-                            <button class="manage" type="submit"><a class="addlink" href="/castManage/">Cast-Details</a></button>
+                            <button class="manage" type="submit"><a class="boxlink" href="/castManage/">Cast-Details</a></button>
                         </div>
                     </div>
                 </div>
