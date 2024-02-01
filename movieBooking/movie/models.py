@@ -72,6 +72,7 @@ class Payment(models.Model):
     no_of_tickets = models.IntegerField()
     total_cost = models.IntegerField()
     email = models.EmailField()
+    password = models.CharField(max_length=10)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     theatre = models.ForeignKey(Theatre, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

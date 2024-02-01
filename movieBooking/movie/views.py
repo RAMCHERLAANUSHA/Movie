@@ -1,6 +1,4 @@
-from django.shortcuts import render
 
-# Create your views here.
 from django.shortcuts import render,redirect
 from movie.models import  Location, Movie, Theatre, Premium_Movie, Movie_cast, Events, User, Payment, Adds
 from django.contrib.auth.models import User as Admin
@@ -350,10 +348,12 @@ def editAdd(request,id):
         else:
             context['error']="Something went wrong"
     return render(request,'addAdds.html',context)
-# ===================================================userrrrrrrrrrrrrrr===========================================================================
 
-def userHomePage(request):
+# =====================================================USERRRRRR=====================================================================
+
+def userHomePage(request,id):
     context = {}
+    users = User.objects.get(id=id)
     premieres = Premium_Movie.objects.all()
     events = Events.objects.all()
     movies=Movie.objects.all()
@@ -365,6 +365,7 @@ def userHomePage(request):
     context['posters']=poster
     context["movies"]=movies
     context['events']=events
+    context['users']=users
     context['premieres']=premieres
     return render(request,'userHome.html',context) 
 
@@ -386,7 +387,7 @@ def signUp(request):
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/userHome/')
+            return redirect('/login/')
         else:
             context['error']="Something went wrong"
     return render(request,'signup.html',context)
@@ -400,7 +401,7 @@ def signIn(request):
         try:
             a1 = User.objects.get(email=email)
             if (password==a1.password):
-                return redirect('/userHome/')
+                return redirect('/userHome/{0}'.format(a1.id))
             else:
                 context["error"] = "Incorrect password.."
                 return render(request,'signin.html', context)
@@ -453,11 +454,8 @@ def paymentManage(request):
     context["payments"]= payments
     return render(request,"paymentManage.html",context)
 
-def deletePayment(request,id):
-    payment = Payment.objects.get(id=id)
-    payment.delete()
-    return redirect('/payment/{0}'.format(payment.id))
 
+from django.shortcuts import get_object_or_404
 
 def addPayment(request, id):
     context = {}
@@ -472,29 +470,51 @@ def addPayment(request, id):
     movies = Movie.objects.all()
     premieres = Premium_Movie.objects.all()
     events = Events.objects.all()
-    context['events']=events
-    context['moviess']=movies
-    context['premieres']=premieres
+    context['events'] = events
+    context['moviess'] = movies
+    context['premieres'] = premieres
     context['error'] = ''
-    email = request.POST.get("email")
-    user_instance = User.objects.filter(email=email).first()
-    payments = Payment.objects.filter(email=user_instance)
-    context["payments"] = payments
-    
+
     if request.method == "POST":
         email = request.POST.get("email")
-        user_instance = User.objects.filter(email=email).first()
-        if user_instance:
-            form = PaymentForm(request.POST)
-            if form.is_valid():
-                payment_instance = form.save(commit=False)
-                payment_instance.user = user_instance
-                payment_instance.save()
-                context['error'] = "Payment Successful"
-                return render(request,"payment.html", context)
+        password = request.POST.get("password")
+        try:
+            user_instance = get_object_or_404(User, email=email)
+            if user_instance.password == password:
+                form = PaymentForm(request.POST)
+                if form.is_valid():
+                    payment_instance = form.save(commit=False)
+                    payment_instance.user = user_instance
+                    payment_instance.save()
+                    context['error'] = "Payment Successful"
+                    return render(request, "payment.html", context)
+                else:
+                    context['error'] = "Something went wrong"
             else:
-                context['error'] = "Something went wrong"
-        else:
+                context['error'] = "Incorrect password"
+        except User.DoesNotExist:
             context['error'] = "Email not registered. Please SignUp"
 
     return render(request, "payment.html", context)
+
+
+def ticketDetails(request,id):
+    context = {}
+    user = User.objects.get(id=id)
+    movies = Movie.objects.all()
+    premieres = Premium_Movie.objects.all()
+    events = Events.objects.all()
+    payment = Payment.objects.filter(user_id=user)
+    context['events']=events
+    context['moviess']=movies
+    context['premieres']=premieres
+    context['payments']=payment
+    context['user']=user
+    return render(request,"ticket_details.html",context)
+
+
+def deletePayment(request,id,user_id):
+    payment = Payment.objects.get(user_id=user_id,id=id)
+    payment.delete()
+    return redirect('/userHome/{0}/ticket'.format(payment.user_id))
+

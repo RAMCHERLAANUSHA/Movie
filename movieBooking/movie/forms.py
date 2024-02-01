@@ -66,15 +66,13 @@ class PaymentForm(forms.ModelForm):
     class Meta:
         model = Payment
         fields = '__all__'
-        exclude = ['user'] 
+        exclude = ['user','total_cost'] 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['theatre'].queryset = Theatre.objects.all()
         self.fields['theatre'].label_from_instance = lambda obj: f"{obj.theatre_name}"
         self.fields['location'].queryset = Location.objects.all()
         self.fields['location'].label_from_instance = lambda obj: f"{obj.location}"
-        # self.fields['user'].queryset = User.objects.all()
-        # self.fields['user'].label_from_instance = lambda obj: f"{obj.email}"
     widgets = {
         'Prize' : Select(attrs={
                 'class': "form-control", 

@@ -56,12 +56,13 @@ urlpatterns = [
     path('deleteposter/<int:id>/',views.deleteAdd),
     path('editposter/<int:id>/',views.editAdd),
 
-    path('userHome/',views.userHomePage),
     path('signup/',views.signUp),
     path('login/',views.signIn),
+    path('userHome/<int:id>/',views.userHomePage),
     path("movieinner/<int:id>/",views.movieInner),
     path("premiereinner/<int:id>/",views.premiereInner),
     path("eventinner/<int:id>/",views.eventInner),
     path('payment/<int:id>/',views.addPayment),
-    path('deletepayment/<int:id>/',views.deletePayment),
+    path('userHome/<int:user_id>/ticket/deletepayment/<int:id>/',views.deletePayment),
+    path('userHome/<int:id>/ticket/',views.ticketDetails)
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

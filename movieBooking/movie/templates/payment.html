@@ -175,10 +175,7 @@
         </div>
         <ul class="navbar-nav collapse navbar-collapse" id="navbarText">
             <li class="nav-item mx-2">
-                <button  class="item"><a class="nav-link active" id="navbtn" href="/signup/">SignUp</a></button>
-            </li>
-            <li class="nav-item mx-2" >
-                <button  class="item"><a class="nav-link active" id="navbtn" href="/login/">SignIn</a></button>
+                <button  class="item"><a class="nav-link active" id="navbtn" href="/signup/">Logout</a></button>
             </li>
         </ul>
     </nav>
@@ -256,36 +253,6 @@
             </div>
         </div>
     </div>
-    <h4>Payment Details</h4>
-    <div class="content">
-        <div class="container d-flex align-items-center justify-content-center">
-            <div class="table-responsive">
-                <table class="table">
-                    <tr>
-                        <th>Prize</th>
-                        <th>Tickets</th>
-                        <th>Total</th>
-                        <th>Email</th>
-                        <th>Location</th>
-                        <th>Theatre</th>
-                        <th>Delete</th>
-
-                    </tr>
-                    {% for payment in payments %}
-                    <tr>
-                        <td>{{payment.filter_prize}}</td>
-                        <td>{{payment.no_of_tickets}}</td>
-                        <td>{{payment.total_cost}}</td>
-                        <td>{{payment.email}}</td>
-                        <td>{{payment.location.location}}</td>
-                        <td>{{payment.theatre.theatre_name}}</td>
-                        <td><button class="edbtn" onclick="deletePayment()"><a href="/deletepayment/{{payment.id}}/" class="hrefbtn">Delete</a></button></td>
-                    </tr>
-                    {% endfor %}
-                </table>
-            </div>
-        </div>
-    </div>
     <!-- ========================================================================================================== -->
     <div class="card mt-2 down">
         <div class="card-body mt-5 mx-5">
@@ -351,10 +318,5 @@
         </div>
     </div>    
     <!-- ============================================================================================================== -->
-    <script>
-        function deletePayment(){
-            alert("Payment Deleted Successfully")
-        }
-    </script>
 </body>
 </html>

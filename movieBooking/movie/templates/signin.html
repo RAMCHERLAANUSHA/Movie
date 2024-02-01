@@ -53,6 +53,10 @@
             text-align: center;
             margin-top: 5px;
         }
+        .bookhref{
+            color: white;
+            text-decoration: none;
+        }
     </style>
 </head>
 
@@ -86,7 +90,7 @@
                         </div>
                     </div>
                     <div class="sign">
-                        <button type="submit" class="signbtn" id="signup" onclick="signUp()">Sign In</button>
+                        <button type="submit" class="signbtn" id="signup"><a class="bookhref">Sign In</a></button>
                     </div>
                     <div>
                         <p class="error-message">{{error}}</p>
@@ -96,12 +100,9 @@
         </div>
     </div>
     <script>
-        function signUp(){
-            alert('SignIn successfull!!!');
-            window.location.href="/userHome/";
-            let data7 = { flaged: true};
-            localStorage.setItem('flags', JSON.stringify(data7));
-        }
+        // function signUp(){
+        //     alert('SignIn successfull!!!');
+        // }
     </script>
 </body>
 </html>
