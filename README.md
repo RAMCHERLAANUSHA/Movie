@@ -17,6 +17,8 @@ Django, HTML, CSS, Bootstrap, JavaScript, SQLite.
 - User can able to see all movies, adds, premieres and event posters and he able to book tickets and he can able to see the details of booked tickets and he can able to delete the tickets.
 - User can able to logout
 - ⭐ User side : Started url: /signup/
+- Demo: [Link to Demo](https://github.com/RAMCHERLAANUSHA/Movie/blob/master/movieBooking/movie.mp4)
+- GitHub: [Link to GitHub Repository](https://github.com/RAMCHERLAANUSHA/Movie)
 ### Contact
 - Anusha Ramcherla
 - anushareddy8677@gmail.com
